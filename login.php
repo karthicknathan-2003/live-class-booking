@@ -12,27 +12,6 @@
 </head>
 
 <body>
-  <!-- <div class="container-sm-4">
-
-    <div class="header">
-      <h2>Sign in</h2>
-    </div>
-    <form class="form" id="form" action="php/loginScript.php" method="post">
-      <div class="form1" id="form1">
-        <label>Email</label>
-        <input type="Text" placeholder="email" name="email" id="email" />
-        <small>Error Message</small>
-      </div>
-      <div class="form1" id="form1">
-        <label>Password</label>
-        <input type="password" placeholder="password" name="pass1" id="pass1" />
-        <small>Error Message</small>
-      </div>
-      <button>Sign in</button>
-      <span>don't have an account?</span>
-      <a href="register.php" id="cont">Sign up</a>
-    </form>
-  </div> -->
 
   <div class="py-5">
     <div class="container">
