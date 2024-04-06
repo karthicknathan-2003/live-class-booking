@@ -2,57 +2,18 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--carousel-->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    <!--bootstrap-->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!--font-->
-    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
     <!--css-->
-    <link rel="stylesheet" href="style.css">
-    <title>Programming Kingdom</title>
+    <link rel="stylesheet" href="css/style.css">
+    <title>Book My Class</title>
 </head>
 
-
 <?php
-require 'db_conn.php';
+require 'php/db_conn.php';
 ?>
-
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light nv sticky-top">
-
-        <div id="mySidenav" class="sidenav">
-            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-            <a href="#popular">Popular Courses</a>
-            <a href="#live">Live Classes</a>
-            <a href="logout.php">Sign out</a>
-        </div>
-        <!--<span class="toggle_icon" onclick="openNav()"><img src="images/toggle-icon.png"></span>-->
-        <span><i class="fa fa-bars menu" onclick="openNav()"></i></span>
-        <!--<a class="nav-link" href="#"> <i class="fa fa-user float-end"></i><span class="sr-only">(current)</span></a>-->
-        <a class="navbar-brand ml-5 logo" href="#">Programming Kingdom</a>
-        <a class="navbar-brand mr-5 " style="margin-left: 520px;">Hello,
-            <?php
-            // $select = "SELECT name1 FROM register";
-            // $query = mysqli_query($conn, $select);
-            // $result = mysqli_fetch_assoc($query);
-            echo $_SESSION['name1'];
-            ?>
-        </a>
-        <!--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>-->
-
-
-    </nav>
+    <?php
+    include('php/navbar.php');
+    include('php/alerts.php'); ?>
 
     <!--carousel-->
     <div class="container" id="cont1">
@@ -64,13 +25,13 @@ require 'db_conn.php';
             </ol>
             <div class="carousel-inner" role="listbox">
                 <div class="carousel-item active">
-                    <img class="img-responsive w-100 m-0" src="photos/e-learning.jpg" alt="First slide">
+                    <img class="img-responsive w-100 m-0" src="images/e-learning.jpg" alt="First slide">
                 </div>
                 <div class="carousel-item">
-                    <img class="img-responsive w-100 m-0" src="photos/graduate.jpg" alt="Second slide">
+                    <img class="img-responsive w-100 m-0" src="images/graduate.jpg" alt="Second slide">
                 </div>
                 <div class="carousel-item">
-                    <img class="img-responsive w-100 m-0" src="photos/prostudy.jpg" alt="Third slide">
+                    <img class="img-responsive w-100 m-0" src="images/prostudy.jpg" alt="Third slide">
                 </div>
             </div>
             <a class="carousel-control-prev" href="#carouselId" role="button" data-slide="prev">
@@ -86,109 +47,100 @@ require 'db_conn.php';
     <br>
     <!--cards-->
     <div class="container-sm-4 m-5" id="popular">
-        <h1 class="text-center">Popular Courses</h1>
+        <h1 class="text-center">Popular Classes</h1>
         <br>
         <div class="row">
-            <div class="card-deck">
+            <div class="card-deck" id="cardeck">
                 <div class="card p-2 shadow-lg p-3 mb-5 bg-white rounded border border-0" id="card">
-                    <img class="card-img-top w-75 pl-5" src="photos/js1.png" alt="">
-                    <div class="card-body">
-                        <h4 class="card-title">Javascript</h4>
-                        <p class="card-text">Book your class now</p>
-                        <a class="btn btn-primary c-white" href="booking.html">Book now</a>
+                    <img class="card-img-top w-75 pl-5" src="images/js1.png" alt="">
+                    <div class="card-body text-center">
+                        <form action="php/classes.php" method="post">
+                            <h4 class="card-title">Javascript</h4>
+                            <p class="card-text">Book your class now</p>
+                            <button class="btn btn-primary c-white" name="submit" value="js">Book now</button>
+                        </form>
                     </div>
                 </div>
                 <div class="card p-2 shadow-lg p-3 mb-5 bg-white rounded border border-0" id="card">
-                    <img class="card-img-top w-75 pl-5" src="photos/react.png" alt="">
-                    <div class="card-body">
-                        <h4 class="card-title">React js</h4>
-                        <p class="card-text">Book your class now</p>
-                        <a class="btn btn-primary c-white" href="booking.html">Book now</a>
+                    <img class="card-img-top w-75 pl-5" src="images/react.png" alt="">
+                    <div class="card-body text-center">
+                        <form action="php/classes.php" method="post">
+                            <h4 class="card-title">React js</h4>
+                            <p class="card-text">Book your class now</p>
+                            <button class="btn btn-primary c-white" name="submit" value="react">Book now</button>
+                        </form>
                     </div>
                 </div>
                 <div class="card p-2 shadow-lg p-3 mb-5 bg-white rounded border border-0" id="card">
-                    <img class="card-img-top w-75 pl-5" src="photos/cs.png" alt="">
-                    <div class="card-body">
-                        <h4 class="card-title">C#</h4>
-                        <p class="card-text">Book your class now</p>
-                        <a class="btn btn-primary c-white" href="booking.html">Book now</a>
+                    <img class="card-img-top w-75 pl-5" src="images/cs.png" alt="">
+                    <div class="card-body text-center">
+                        <form action="php/classes.php" method="post">
+                            <h4 class="card-title">C#</h4>
+                            <p class="card-text">Book your class now</p>
+                            <button class="btn btn-primary c-white" name="submit" value="cs">Book now</button>
+                        </form>
                     </div>
                 </div>
                 <div class="card p-2 shadow-lg p-3 mb-5 bg-white rounded border border-0" id="card">
-                    <img class="card-img-top w-75 pl-5" src="photos/java.png" alt="">
-                    <div class="card-body">
-                        <h4 class="card-title">Java</h4>
-                        <p class="card-text">Book your class now</p>
-                        <a class="btn btn-primary c-white" href="booking.html">Book now</a>
+                    <img class="card-img-top w-75 pl-5" src="images/java.png" alt="">
+                    <div class="card-body text-center">
+                        <form action="php/classes.php" method="post">
+                            <h4 class="card-title">Java</h4>
+                            <p class="card-text">Book your class now</p>
+                            <button class="btn btn-primary c-white" name="submit" value="java">Book now</button>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-
-    <!--cards-->
-    <div class="container-sm-4 m-5" id="live">
-        <h1 class="text-center ">Live Classes</h1>
-        <br>
         <div class="row">
-            <div class="card-deck">
+            <div class="card-deck" id="cardeck">
                 <div class="card p-2 shadow-lg p-3 mb-5 bg-white rounded border border-0" id="card">
-                    <img class="card-img-top w-75 pl-5" src="photos/hack.png" alt="">
-                    <div class="card-body">
-                        <h4 class="card-title">Ethical Hacking</h4>
-                        <p class="card-text">Book your class now</p>
-                        <a class="btn btn-primary c-white" href="booking.html">Book now</a>
+                    <img class="card-img-top w-75 pl-5" src="images/hack.png" alt="">
+                    <div class="card-body text-center">
+                        <form action="php/classes.php" method="post">
+                            <h4 class="card-title">Ethical Hacking</h4>
+                            <p class="card-text">Book your class now</p>
+                            <button class="btn btn-primary c-white" name="submit" value="hack">Book now</button>
+                        </form>
                     </div>
                 </div>
                 <div class="card p-2 shadow-lg p-3 mb-5 bg-white rounded border border-0" id="card">
-                    <img class="card-img-top w-75 pl-5" src="photos/aws.png" alt="">
-                    <div class="card-body">
-                        <h4 class="card-title">AWS</h4>
-                        <p class="card-text">Book your class now</p>
-                        <a class="btn btn-primary c-white" href="#">Book now</a>
+                    <img class="card-img-top w-75 pl-5" src="images/aws.png" alt="">
+                    <div class="card-body text-center">
+                        <form action="php/classes.php" method="post">
+                            <h4 class="card-title">AWS</h4>
+                            <p class="card-text">Book your class now</p>
+                            <button class="btn btn-primary c-white" name="submit" value="aws">Book now</button>
+                        </form>
                     </div>
                 </div>
                 <div class="card p-2 shadow-lg p-3 mb-5 bg-white rounded border border-0" id="card">
-                    <img class="card-img-top w-75 pl-5" src="photos/node.png" alt="">
-                    <div class="card-body">
-                        <h4 class="card-title">Node js</h4>
-                        <p class="card-text">Book your class now</p>
-                        <a class="btn btn-primary c-white" href="#">Book now</a>
+                    <img class="card-img-top w-75 pl-5" src="images/node.png" alt="">
+                    <div class="card-body text-center">
+                        <form action="php/classes.php" method="post">
+                            <h4 class="card-title">Node js</h4>
+                            <p class="card-text">Book your class now</p>
+                            <button class="btn btn-primary c-white" name="submit" value="node">Book now</button>
+                        </form>
                     </div>
                 </div>
                 <div class="card p-2 shadow-lg p-3 mb-5 bg-white rounded border border-0" id="card">
-                    <img class="card-img-top w-75 pl-5" src="photos/py.png" alt="">
-                    <div class="card-body">
-                        <h4 class="card-title">Python</h4>
-                        <p class="card-text">Book your class now</p>
-                        <a class="btn btn-primary c-white" href="#">Book now</a>
+                    <img class="card-img-top w-75 pl-5" src="images/py.png" alt="">
+                    <div class="card-body text-center">
+                        <form action="php/classes.php" method="post">
+                            <h4 class="card-title">Python</h4>
+                            <p class="card-text">Book your class now</p>
+                            <button class="btn btn-primary c-white" name="submit" value="py">Book now</button>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!--section-->
-    <!-- <div class="container-sm-4 ml-4 mr-4" id="cont2">
-        <h1 class="text-center">More</h1>
-        <br>
-        <div class="card text-left p-2 shadow-lg p-3 mb-5 bg-white rounded border border-0">
-            <div class="row">
-                <div class="col-md-6">
-                    <img class="img-left w-75" src="photos/code.jpg" alt="">
-                </div>
-                <div class="col-md-6 mt-4 av">
-                    <h3 class="mr-5 pr-5">Learn Programming easily</h3>
-                    <p class="">Learn programming languages by watching experts lectures.</p>
-                    <a class="btn btn-primary c-white" href="#">Explore</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <br> -->
     <!-- Footer -->
-
     <div class="container-sm-4 footer">
         <footer class="text-center text-lg-start border border-white mt-xl-5 pt-4">
             <!-- Grid container -->
@@ -197,10 +149,9 @@ require 'db_conn.php';
                 <div class="row">
                     <!--Grid column-->
                     <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
-                        <h5 class="text-uppercase mb-4">PROGRAMMING KINGDOM</h5>
+                        <h5 class="text-uppercase mb-4">Book My Class</h5>
                         <p>
-                            Our platform contains only programming related contents and videos of
-                            best online teachers.
+                            Our platform contains latest live classes for the experts all over the world.
                         </p>
                     </div>
                     <!--Grid column-->
@@ -210,23 +161,23 @@ require 'db_conn.php';
                         <h5 class="text-uppercase mb-4">Popular</h5>
 
                         <p>
-                            <a href="#!" class="text-white">Javascript</a>
+                            <a href="#popular" class="text-white">Javascript</a>
                         </p>
                         <p>
-                            <a href="#!" class="text-white">React</a>
+                            <a href="#popular" class="text-white">React</a>
                         </p>
                         <p>
-                            <a href="#!" class="text-white">Java</a>
+                            <a href="#popular" class="text-white">Java</a>
                         </p>
                         <p>
-                            <a href="#!" class="text-white">Python</a>
+                            <a href="#popular" class="text-white">Python</a>
                         </p>
                     </div>
                     <!--Grid column-->
 
                     <!--Grid column-->
                     <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
-                        <h5 class="text-uppercase mb-4">Careers</h5>
+                        <h5 class="text-uppercase mb-4">Location</h5>
 
                         <p><i class="fa fa-home mr-1"></i> KSRCT,KSR KALVI NAGAR,TIRUCHENGODU</p>
                         <p><i class="fa fa-envelope mr-1"></i> pgmkingdom17@gmail.com</p>
@@ -236,9 +187,9 @@ require 'db_conn.php';
                     <!--Grid column-->
 
                     <!--Grid column-->
-                    <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                    <div class="col-lg-3 col-md-6 mb-4 mb-lg-0" id="reachus">
                         <h5 class="text-uppercase mb-4">reach us</h5>
-                        <form action="reachus.php" method="post" class="footform">
+                        <form action="php/reachus.php" method="post" class="footform">
                             <div class="form-outline form-white mb-4">
                                 <input type="text" placeholder="Name" class="form-control" name="name1" />
                                 <input type="email" placeholder="Email" class="form-control" name="email" />
@@ -255,14 +206,10 @@ require 'db_conn.php';
 
             <!-- Copyright -->
             <div class="text-center p-3 border-top border-white">
-                <a class="text-white" href="#">ProgrammingKingdom</a>
+                <a class="text-white" href="#">Book My Class</a>
             </div>
-            <!-- Copyright -->
         </footer>
     </div>
-
-
-
 
     <!--scroll to top-->
     <button type="button" class="btn btn-danger btn-floating btn-lg " id="btn-back-to-top">

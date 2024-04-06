@@ -1,60 +1,99 @@
-<?php
-$name1=$_POST['name1'];
-$email=$_POST['email'];
-$gender=$_POST['gender'];
-$phone=$_POST['phone'];
-$degree=$_POST['degree'];
-$dept=$_POST['dept'];
-$college=$_POST['college'];
-$dist=$_POST['dist'];
-$submit=$_POST['submit'];
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- header contains all the bootstrap cdn links -->
+    <?php require('php/db_conn.php'); ?>
+    <?php require('php/header.php'); ?>
+    <title>Register</title>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h1>Registration</h1><br>
+                <form action="php/booking.php" method="post">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="name" name="name1" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Gender</label><br>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="gender" id="gender-male" value="male" required>
+                            <label class="form-check-label" for="gender-male">Male</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="gender" id="gender-female" value="female" required>
+                            <label class="form-check-label" for="gender-female">Female</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="gender" id="gender-others" value="others" required>
+                            <label class="form-check-label" for="gender-others">Others</label>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Phone Number</label>
+                        <input type="tel" class="form-control" id="phone" name="phone" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="degree" class="form-label">Degree</label>
+                        <input type="text" class="form-control" id="degree" name="degree" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="department" class="form-label">Department</label>
+                        <input type="text" class="form-control" id="department" name="dept" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="college" class="form-label">College Name</label>
+                        <input type="text" class="form-control" id="college" name="college" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="district" class="form-label">District</label>
+                        <input type="text" class="form-control" id="district" name="dist" required>
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="terms" name="tc" value="Accepted" required>
+                        <label class="form-check-label" for="terms">I agree to the terms and conditions</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary" name="submit">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
 
 
-
-if(isset($submit)){
-    $host="localhost";
-    $dbusername="root";
-    $dbpassword="";
-    $dbname="project";
-
-    $conn =new mysqli($host,$dbusername,$dbpassword,$dbname);
-    if(!empty($name1)||!empty($email)||!empty($gender)||!empty($phone)||!empty($degree)||!empty($dept)||!empty($college)||!empty($dist)){
-
-        if(!empty($_POST['tc'])){
-            $tc=$_POST['tc'];
-            if(filter_var($email,FILTER_VALIDATE_EMAIL)){
-                $conn=new mysqli($host,$dbusername,$dbpassword,$dbname);
-                if(mysqli_connect_error()){
-                    die('Connect Error('.mysqli_connect_errno().')'.mysqli_connect_error());
-                }
-                else{
-                    $SELECT ="SELECT email FROM booking WHERE email=? LIMIT 1";
-                    $INSERT="INSERT INTO booking(name1,email,gender,phone,degree,dept,college,dist,tc)values(?,?,?,?,?,?,?,?,?)";
-                    $stmt=$conn->prepare($SELECT);
-                    $stmt->bind_param("s",$email);
-                    $stmt->execute();
-                    $stmt->bind_result($email);
-                    $stmt->store_result();
-                    $rnum=$stmt->num_rows;
-                    if($rnum==0){
-                        $stmt=$conn->prepare($INSERT);
-                        $stmt->bind_param("sssisssss",$name1,$email,$gender,$phone,$degree,$dept,$college,$dist,$tc);
-                        $stmt->execute();
-                        header('location:thanks.html');
-                    }
-                    else{
-                        echo '<script>alert("Registeration Failed...")</script>';
-                    }
-                }
-            }else{
-                echo '<script>alert("Enter a valid email...")</script>';
-            }
-        }else{
-            echo '<script>alert("Please accept our Terms and Conditions...")</script>';
+    <style>
+        body {
+            font-family: 'poppins';
+            background-image: url(photos/books.jpg);
+            background-size: cover;
         }
-    }else{
-        echo '<script>alert("All fields are Required...")</script>';
-        
-    }
-}
-?>
+
+        #cont {
+            position: relative;
+            align-items: center;
+        }
+
+        #cont .form-group input:focus {
+            outline: none;
+            box-shadow: none;
+        }
+
+        #cont .form-group label {
+            font-weight: bold;
+        }
+
+        /* .form-group #one {
+            margin-top: 0px;
+            display: inline-block;
+        } */
+    </style>
+</body>
+
+</html>

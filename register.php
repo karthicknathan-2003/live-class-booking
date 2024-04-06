@@ -2,86 +2,154 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--carousel-->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    <!--bootstrap-->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!--font-->
-    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+  <!-- header contains all the bootstrap cdn links -->
+  <?php
+  session_start();
+  require('php/header.php'); ?>
+
+  <!--css-->
+  <link rel="stylesheet" href="css/form.css" />
+  <title>Register Page</title>
 </head>
 
-</html>
+<body>
+  <div class="py-5">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-5">
+          <?php include('php/alerts.php'); ?>
+          <div class="card p-3">
+            <h3 class="card-title text-center">Sign up</h3><br>
+            <form class="form" id="form" action="php/registerScript.php" method="post">
+              <div class="form1 mb-3" id="form1">
+                <label class="form" for="name1">Email</label>
+                <input class="form-control" type="text" placeholder="name" name="name1" id="name1" />
+                <small>Error Message</small>
+              </div>
+              <div class="form1 mb-3" id="form1">
+                <label class="form">Email</label>
+                <input class="form-control" type="Text" placeholder="email" name="email" id="email" />
+                <small>Error Message</small>
+              </div>
+              <div class="form1 mb-3" id="form1">
+                <label class="form">Password</label>
+                <input class="form-control" type="password" placeholder="password" name="pass" id="pass" />
+                <small>Error Message</small>
+              </div>
+              <div class="form1 mb-3" id="form1">
+                <label class="form">Password</label>
+                <input class="form-control" type="password" placeholder="password" name="cpass" id="cpass" />
+                <small>Error Message</small>
+              </div>
+              <button type="submit" class="btn btn-primary mb-3">Sign up</button>
+              <span>don't have an account?</span>
+              <a href="login.php" id="cont">Sign in</a>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 
+  <div class="py-5">
+    <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-5">
+      <div class="card">
+        <h2>Sign in</h2>
+        <form class="form" id="form" action="php/registerScript.php" method="post">
+          <div class="form1" id="form1">
+            <label>Email</label>
+            <input type="text" placeholder="name" name="name1" id="name1" />
+            <small>Error Message</small>
+          </div>
+          <div class="form1" id="form1">
+            <label>Email</label>
+            <input type="Text" placeholder="email" name="email" id="email" />
+            <small>Error Message</small>
+          </div>
+          <div class="form1" id="form1">
+            <label>Password</label>
+            <input type="password" placeholder="password" name="pass" id="pass" />
+            <small>Error Message</small>
+          </div>
+          <div class="form1" id="form1">
+            <label>Password</label>
+            <input type="password" placeholder="password" name="cpass" id="cpass" />
+            <small>Error Message</small>
+          </div>
+          <button>Sign up</button>
+          <span>don't have an account?</span>
+          <a href="login.php" id="cont">Sign in</a>
+        </form>
+      </div>
+    </div>
+  </div>
+  </div>
+  </div> -->
+</body>
 
 
+<!-- <script>
+  const form = document.getElementById("form");
+  const name1 = document.getElementById("name1");
+  const email = document.getElementById("email");
+  const password = document.getElementById("pass");
+  const cpassword = document.getElementById("cpass");
+  form.addEventListener("submit", (e) => {
+    checkInput();
+  });
 
-<?php
-$name1 = $_POST['name1'];
-$email = $_POST['email'];
-$pass = $_POST['pass'];
-$cpass = $_POST['cpass'];
-
-
-if (!empty($name1) || !empty($email) || !empty($pass) || !empty($cpass)) {
-    if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        if ($pass === $cpass) {
-
-            $host = "localhost";
-            $dbusername = "root";
-            $dbpassword = "";
-            $dbname = "project";
-
-            $conn = new mysqli($host, $dbusername, $dbpassword, $dbname);
-            if (mysqli_connect_error()) {
-                die('Connect Error(' . mysqli_connect_errno() . ')' . mysqli_connect_error());
-            } else {
-                $SELECT = "SELECT email FROM register WHERE email=? LIMIT 1";
-                $INSERT = "INSERT INTO register(name1,email,pass,cpass)values(?,?,?,?)";
-
-                $stmt = mysqli_prepare($conn, $SELECT);
-                $stmt->bind_param("s", $email);
-                $stmt->execute();
-                $stmt->bind_result($email);
-                $stmt->store_result();
-                $rnum = $stmt->num_rows;
-                if ($rnum == 0) {
-                    $stmt->close();
-                    $stmt = $conn->prepare($INSERT);
-                    $stmt->bind_param("ssss", $name1, $email, $pass, $cpass);
-                    $stmt->execute();
-                    session_start();
-                    $_SESSION["name1"]=$name1;
-                    header('location:main.php');
-                    exit();
-                } else {
-                    echo " <div class='alert alert-danger' id='alert'>
-                    <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
-                    <b class='text-center'>Your mail is already registered..Please login here..</b></div>";
-                    header('location:login.html');
-                    exit();
-                }
-                $stmt->close();
-                $conn->close();
-            }
-        } else {
-            echo '<script>alert("Please enter a correct password")</script>';
-        }
+  function checkInput() {
+    const name1Value = name1.value.trim();
+    const emailValue = email.value.trim();
+    const passValue = password.value.trim();
+    const cpassValue = cpassword.value.trim();
+    if (name1Value === "") {
+      setError(name1, "Name cannot be blank");
     } else {
-        echo '<script>alert("Enter a Valid Email")</script>';
+      setSuccess(name1);
     }
-} else {
-    echo '<script>alert("All fields are required")</script>';
-    exit();
-}
-?>
-<style>
-    #alert{
-        z-index: +1;
+    if (emailValue === "") {
+      setError(email, "Email cannot be blank");
+    } else if (!isEmail(emailValue)) {
+      setError(email, "Not a valid email");
+    } else {
+      setSuccess(email);
     }
-</style>
+    if (passValue === "") {
+      setError(password, "Password cannot be blank");
+    } else {
+      setSuccess(password);
+    }
+    if (cpassValue === "") {
+      setError(cpassword, "Password cannot be blank");
+    } else if (cpassValue !== passValue) {
+      setError(cpassword, "Password not match");
+    } else {
+      setSuccess(cpassword);
+    }
+  }
+
+  function isEmail(email) {
+    //return /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/.test(email);
+    return /^([a-z0-9\+\-]+)(\.[a-z0-9\+\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/.test(
+      email
+    );
+  }
+
+  function setError(input, message) {
+    const form1 = input.parentElement;
+    const small = form1.querySelector("small");
+    form1.className = "form1 error";
+    small.innerText = message;
+  }
+
+  function setSuccess(input) {
+    const form1 = input.parentElement;
+    form1.className = "form1 success";
+  }
+</script> -->
+
+</html>
